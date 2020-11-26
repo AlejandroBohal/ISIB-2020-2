@@ -1,0 +1,10 @@
+version: '3'
+services:
+  kafka:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: elcostalitoalegre/kafkabroker:latest
+    container_name: KafkaBroker
+    ports:
+      - "8081:8080"
