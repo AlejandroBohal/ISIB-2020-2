@@ -1,3 +1,3 @@
-# Spring-chat-broker
+# ISIB FRONT-END
 
-https://chat-storage-mdb.herokuapp.com/chat-websocket
+
