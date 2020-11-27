@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Controller
 public class AlertController {
-    private Plant plant;
+    private Plant plant = new Plant();
 
     @PostMapping("/stats")
     public ResponseEntity<?> create(@RequestBody Plant json) {
