@@ -1,26 +1,31 @@
 package edu.eci.springboot.chat.controllers;
 
-import edu.eci.springboot.chat.models.service.IChatService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
+import edu.eci.springboot.chat.models.Plant;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import edu.eci.springboot.chat.models.documents.Message;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Date;
-import java.util.Random;
+import java.util.Map;
 
 @Controller
 public class AlertController {
+    private Plant plant;
 
-    @Autowired
-    private SimpMessagingTemplate webSocket;
-
-    @MessageMapping("/data")
-    @SendTo("/kafka/data")
-    public String kafkaAlert(String msg) {
-        System.out.println(msg);
-        return null;
+    @PostMapping("/stats")
+    public ResponseEntity<?> create(@RequestBody Plant json) {
+        System.out.println(json);
+        this.plant = json;
+        return new ResponseEntity<Map<String, Object>>(HttpStatus.CREATED);
     }
+
+    @GetMapping("/stats")
+    //  Retorno el estado de la creacion (por defecto es OK)
+//  @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> show() {
+        return new ResponseEntity<Plant>(this.plant, HttpStatus.OK);
+    }
+
 }
